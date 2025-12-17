@@ -54,7 +54,7 @@ static int try_move(int direction, int on_x, int on_y, int width, int height, un
 	}
 
 
-	else{printf("%s", "ERROR_Dir_ERROR");return(4);} 	//something went wrong.
+	else{return(4);} 					//something went wrong.
 }
 
 
@@ -133,9 +133,9 @@ void write_header(FILE *file, int width, int height)
 	header[53]=(0);
 
 
-				// I *really* need to revise this, 
+				// it *really* need to revise this, 
 				// but for now, it is functional.
-				// It *is* really bad tho...
+				// it *is* really bad tho...
 
 
 
@@ -173,7 +173,7 @@ int main()
 	bool place; 				// has block been placed?
 	
 
-						// Using chars so it doesn't break after a few thousand by a few thousand.
+						// Using chars so it doesn't break after a few thousand.
 
 	int r = 255;				// start red at max (will be faded out later)
 	int g = 255;				// start blue at max (will be faded out later)
@@ -233,7 +233,7 @@ int main()
 			
 			ret = try_move(direction,			// try to move and
 				       on_rx,				// save the result
-				       on_ry,				// of trying to ret.
+				       on_ry,				// ret().
 				       width,
 				       height,
 				       grid
@@ -257,7 +257,7 @@ int main()
 			
 			else if(ret == 2){direction = rand() % 4;}
 			
-			else if (ret == 4){printf("%s", "error4error");}
+			else if (ret == 4){printf("%s", "WARN: Failed ret");}
 			
 			else{place =true;}
 		}
@@ -279,9 +279,9 @@ int main()
 	
 
 
-	unsigned char zer = 0;					// pointer to zero.
-								// i need to figure 
-								// something better out...
+	unsigned char zer = 0;					// zero.
+								// ...
+								// i need to figure out something better...
 
 	
 
@@ -318,9 +318,9 @@ int main()
 				int pt = 255-grid[y][x];	// and add it to bmp
 
 
-				r = (3*pt);		// functions to change
-				g = (3*pt-255*2);	// colour based on when
-        			b = (3*pt-255);		// it was placed
+				r = (3*pt);			// functions to change
+				g = (3*pt-255*2);		// colour based on when
+        			b = (3*pt-255);			// it was placed
 				
 
 
