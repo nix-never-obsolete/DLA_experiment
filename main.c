@@ -66,7 +66,7 @@ static int try_move(int direction, int on_x, int on_y, int width, int height, un
 
 void write_header(FILE *file, int width, int height)
 {	
-	int filesize = (width*height*3 + height*((width*3)%4)+54);
+	int filesize = (width*height*3 + height*((4-((width*3)%4)))+54);
 	
 	unsigned char header[54];
 	
@@ -273,7 +273,7 @@ int main()
 
 	if (file == NULL){printf("failed to open file.");}
 
-	int needed_padding = (width*3)%4;
+	int needed_padding = 4-(width*3)%4;
 
 	write_header(file, width, height);			// generate the header of the bitmap and write it to the file.
 	
@@ -351,12 +351,15 @@ int main()
 
 			}
 			
-			for(int padded = 0; padded < needed_padding; padded++)
-			{
-				fwrite(&zer, 1, 1, file);			// add padding to bmp
-			}
-
+		
 		}
+
+
+		for(int padded = 0; padded < needed_padding; padded++)
+		{
+			fwrite(&zer, 1, 1, file);			// add padding to bmp
+		}
+
 		printf("%s", "\n");
 	}
 	printf("%s", "Finished!");
