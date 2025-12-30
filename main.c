@@ -66,7 +66,7 @@ static int try_move(int direction, int on_x, int on_y, int width, int height, un
 
 void write_header(FILE *file, int width, int height)
 {	
-	int filesize = (width*height*3 + height*((4-((width*3)%4)))+54);
+	int filesize = (width*height*3 + height*((4-((width*3)%4))%4)+54);
 	
 	unsigned char header[54];
 	
@@ -273,7 +273,7 @@ int main()
 
 	if (file == NULL){printf("failed to open file.");}
 
-	int needed_padding = 4-(width*3)%4;
+	int needed_padding = (4-(width*3)%4)%4;
 
 	write_header(file, width, height);			// generate the header of the bitmap and write it to the file.
 	
